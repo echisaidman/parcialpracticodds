@@ -2,7 +2,6 @@ package dds.miliechi.parcialpractico.repositories;
 
 import dds.miliechi.parcialpractico.entities.PruebaSqlServerEntity;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.List;

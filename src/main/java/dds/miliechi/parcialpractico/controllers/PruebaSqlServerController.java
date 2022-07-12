@@ -1,7 +1,6 @@
 package dds.miliechi.parcialpractico.controllers;
 
 import dds.miliechi.parcialpractico.entities.PruebaSqlServerEntity;
-import dds.miliechi.parcialpractico.repositories.PruebaSqlServerRepository;
 import dds.miliechi.parcialpractico.services.PruebaSqlServerService;
 import org.springframework.web.bind.annotation.*;
 

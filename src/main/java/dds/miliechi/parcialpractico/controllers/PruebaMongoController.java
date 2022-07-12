@@ -1,7 +1,6 @@
 package dds.miliechi.parcialpractico.controllers;
 
 import dds.miliechi.parcialpractico.entities.PruebaMongoEntity;
-import dds.miliechi.parcialpractico.repositories.PruebaMongoRepository;
 import dds.miliechi.parcialpractico.services.PruebaMongoService;
 import org.springframework.web.bind.annotation.*;
 
