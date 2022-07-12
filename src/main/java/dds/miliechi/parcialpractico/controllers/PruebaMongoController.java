@@ -2,6 +2,7 @@ package dds.miliechi.parcialpractico.controllers;
 
 import dds.miliechi.parcialpractico.entities.PruebaMongoEntity;
 import dds.miliechi.parcialpractico.repositories.PruebaMongoRepository;
+import dds.miliechi.parcialpractico.services.PruebaMongoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,21 +11,20 @@ import java.util.List;
 @RequestMapping("/api/pruebamongo")
 public class PruebaMongoController {
 
-    private final PruebaMongoRepository repository;
+    private final PruebaMongoService service;
 
-    public PruebaMongoController(PruebaMongoRepository repository) {
-        this.repository = repository;
-
+    public PruebaMongoController(PruebaMongoService service) {
+        this.service = service;
     }
 
     @GetMapping
     public List<PruebaMongoEntity> list() {
-        return repository.list();
+        return service.list();
     }
 
     @PostMapping
     public void save(@RequestBody PruebaMongoEntity entity) {
-        repository.save(entity);
+        service.save(entity);
     }
 
 }

@@ -12,10 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PruebaMongoEntity {
-
-    @Id
-    private UUID id = UUID.randomUUID();
+public class PruebaMongoEntity extends BaseEntity {
 
     private String firstName;
     private String lastName;
