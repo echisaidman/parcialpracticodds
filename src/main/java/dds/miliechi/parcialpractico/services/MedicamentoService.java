@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -15,17 +14,9 @@ import java.util.stream.Collectors;
 public class MedicamentoService {
 
     private final MedicamentoRepository medicamentoRepository;
-    private final EmpresaService empresaService;
 
-    public MedicamentoService(MedicamentoRepository medicamentoRepository, EmpresaService empresaService) {
+    public MedicamentoService(MedicamentoRepository medicamentoRepository) {
         this.medicamentoRepository = medicamentoRepository;
-        this.empresaService = empresaService;
-    }
-
-    @Transactional
-    public Optional<MedicamentoDto> findByName(String name) {
-        Optional<Medicamento> medicamentoOptional = medicamentoRepository.findByName(name);
-        return medicamentoOptional.map(MedicamentoDto::from);
     }
 
     @Transactional
@@ -37,6 +28,12 @@ public class MedicamentoService {
     public List<MedicamentoDto> list() {
         List<Medicamento> medicamentos = medicamentoRepository.list();
         return medicamentos.stream().map(MedicamentoDto::from).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public MedicamentoDto save(Medicamento medicamento) {
+        medicamentoRepository.save(medicamento);
+        return MedicamentoDto.from(medicamento);
     }
 
 }

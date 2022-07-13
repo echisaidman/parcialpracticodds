@@ -20,7 +20,7 @@ public class Empresa extends BaseEntity {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "empresa", cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "empresa", cascade = {CascadeType.ALL})
     private List<Medicamento> medicamentos = new ArrayList<>();
 
     public void addMedicamento(Medicamento medicamento) {

@@ -1,9 +1,12 @@
 package dds.miliechi.parcialpractico.services;
 
 import dds.miliechi.parcialpractico.dtos.EmpresaDto;
+import dds.miliechi.parcialpractico.dtos.IdTextPair;
 import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
+import dds.miliechi.parcialpractico.entities.ComboMedicamentos;
 import dds.miliechi.parcialpractico.entities.Empresa;
 import dds.miliechi.parcialpractico.entities.Medicamento;
+import dds.miliechi.parcialpractico.entities.MedicamentoIndividual;
 import dds.miliechi.parcialpractico.repositories.EmpresaRepository;
 import dds.miliechi.parcialpractico.repositories.MedicamentoRepository;
 import org.springframework.stereotype.Service;
@@ -18,11 +21,13 @@ import java.util.stream.Collectors;
 public class EmpresaService {
 
     private final EmpresaRepository empresaRepository;
-    // private final MedicamentoRepository medicamentoRepository;
+    private final MedicamentoRepository medicamentoRepository;
+    // private final MedicamentoService medicamentoService;
 
     public EmpresaService(EmpresaRepository empresaRepository, MedicamentoRepository medicamentoRepository) {
         this.empresaRepository = empresaRepository;
-        // this.medicamentoRepository = medicamentoRepository;
+        // this.medicamentoService = medicamentoService;
+        this.medicamentoRepository = medicamentoRepository;
     }
 
     @Transactional
@@ -53,9 +58,27 @@ public class EmpresaService {
     @Transactional
     public MedicamentoDto addNewMedicamento(MedicamentoDto medicamentoDto) {
         Empresa empresa = empresaRepository.findById(medicamentoDto.getEmpresa().getId());
-        Medicamento medicamento = new Medicamento();
+
+        Medicamento medicamento;
+        if (medicamentoDto.getMedicamentos() == null || medicamentoDto.getMedicamentos().isEmpty()) {
+            // Si no tiene Medicamentos, es un MedicamentoIndividual
+            medicamento = new MedicamentoIndividual();
+            ((MedicamentoIndividual) medicamento).setPrecio(medicamentoDto.getPrecio());
+        } else {
+            // Si tiene Medicamentos, es un ComboMedicamentos
+            medicamento = new ComboMedicamentos();
+            List<UUID> idsMedicamentosComponentes = medicamentoDto.getMedicamentos().stream()
+                    .map(IdTextPair::getId)
+                    .collect(Collectors.toList());
+            for (UUID idComponente : idsMedicamentosComponentes) {
+                Medicamento medicamentoComponente = medicamentoRepository.findById(idComponente);
+                ((ComboMedicamentos) medicamento).getMedicamentos().add(medicamentoComponente);
+            }
+        }
+
         medicamento.setNombre(medicamentoDto.getNombre());
         empresa.addMedicamento(medicamento);
+        // return medicamentoService.save(medicamento);
         return MedicamentoDto.from(medicamento);
     }
 }
