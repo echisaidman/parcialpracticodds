@@ -18,7 +18,7 @@ public class ComboMedicamentos extends Medicamento {
     // El precio de un Combo tiene un 10% de descuento respecto al precio de sus Componentes
     private static final double PORCENTAJE_DESCUENTO_COMBO = 10;
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "medicamentos_por_combo",
             joinColumns = @JoinColumn(name = "combo_medicamento"),
