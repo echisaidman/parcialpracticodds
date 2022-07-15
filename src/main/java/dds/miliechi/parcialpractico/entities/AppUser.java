@@ -16,5 +16,7 @@ public class AppUser extends BaseEntity {
 
     private String username;
     private String password;
+    private Double altura; // En centimetros
+    private Double peso; // En KGs
 
 }
