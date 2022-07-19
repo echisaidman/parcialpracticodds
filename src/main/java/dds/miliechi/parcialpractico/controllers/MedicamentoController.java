@@ -3,6 +3,7 @@ package dds.miliechi.parcialpractico.controllers;
 import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
 import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
 import dds.miliechi.parcialpractico.entities.AppUser;
+import dds.miliechi.parcialpractico.security.IsAdmin;
 import dds.miliechi.parcialpractico.services.EmpresaService;
 import dds.miliechi.parcialpractico.services.MedicamentoService;
 import dds.miliechi.parcialpractico.services.UserService;
@@ -29,6 +30,7 @@ public class MedicamentoController {
     }
 
     @PostMapping
+    @IsAdmin
     public ResponseEntity<MedicamentoDto> save(@RequestBody MedicamentoDto medicamentoDto) {
         MedicamentoDto savedMedicamentoDto = empresaService.addNewMedicamento(medicamentoDto);
         return ResponseEntity.ok(savedMedicamentoDto);

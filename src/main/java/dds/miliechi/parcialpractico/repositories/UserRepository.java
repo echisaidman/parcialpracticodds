@@ -37,7 +37,9 @@ public class UserRepository implements dds.miliechi.parcialpractico.repositories
         String sql = "from AppUser u where u.id = :id";
         return entityManager.createQuery(sql, AppUser.class)
                 .setParameter("id", id)
-                .getSingleResult();
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -50,4 +52,13 @@ public class UserRepository implements dds.miliechi.parcialpractico.repositories
         return entityManager.merge(entity);
     }
 
+    public boolean existsUserWithAdminRole() {
+        String sql = "select user " +
+                "from AppUser as user " +
+                "join user.roles as role " +
+                "where role.nombre = 'ADMIN'";
+        return !entityManager.createQuery(sql, AppUser.class)
+                .getResultList()
+                .isEmpty();
+    }
 }

@@ -1,6 +1,7 @@
 package dds.miliechi.parcialpractico.controllers;
 
 import dds.miliechi.parcialpractico.dtos.EmpresaDto;
+import dds.miliechi.parcialpractico.security.IsAdmin;
 import dds.miliechi.parcialpractico.services.EmpresaService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class EmpresaController {
     }
 
     @PostMapping
+    @IsAdmin
     public ResponseEntity<EmpresaDto> save(@RequestBody EmpresaDto empresaDto) {
         EmpresaDto savedEmpresaDto = empresaService.save(empresaDto);
         return ResponseEntity.ok(savedEmpresaDto);

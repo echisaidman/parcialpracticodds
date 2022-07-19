@@ -3,6 +3,7 @@ package dds.miliechi.parcialpractico.services;
 import dds.miliechi.parcialpractico.apis.CalculadoraBMI;
 import dds.miliechi.parcialpractico.dtos.RegisterRequest;
 import dds.miliechi.parcialpractico.entities.AppUser;
+import dds.miliechi.parcialpractico.repositories.RoleRepository;
 import dds.miliechi.parcialpractico.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
 
     @Transactional
@@ -43,8 +46,18 @@ public class UserService {
         appUser.setPassword(passwordEncoder.encode(request.getPassword()));
         appUser.setAltura(request.getAltura());
         appUser.setPeso(request.getPeso());
-        userRepository.save(appUser);
-        return appUser;
+        appUser.addRole(roleRepository.findByRoleName("USER").get());
+        return save(appUser);
+    }
+
+    @Transactional
+    public AppUser save(AppUser user) {
+        if (userRepository.findById(user.getId()) == null) {
+            userRepository.save(user);
+        } else {
+            user = userRepository.merge(user);
+        }
+        return user;
     }
 
     @Transactional
@@ -52,5 +65,10 @@ public class UserService {
         AppUser appUser = userRepository.findById(id);
         double alturaEnMetros = appUser.getAltura() / 100;
         return calculadoraBMI.calcular(alturaEnMetros, appUser.getPeso());
+    }
+
+    @Transactional
+    public boolean existsUserWithAdminRole() {
+        return userRepository.existsUserWithAdminRole();
     }
 }

@@ -5,24 +5,37 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtils implements Serializable {
 
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // 5 horas
+    public static final String JWT_AUTHORITIES_KEY = "CLAIM_TOKEN";
 
     // TODO: sacar esto de Environment Variables
     @Value("${jwt.secret}")
     private String secret;
+
+    public UsernamePasswordAuthenticationToken getUsernamePasswordAuthenticationToken(String token, UserDetails userDetails) {
+        Claims claims = getAllClaimsFromToken(token);
+        List<String> claimAuthorities = Arrays.asList(claims.get(JWT_AUTHORITIES_KEY).toString().split(","));
+        List<GrantedAuthority> authorities = claimAuthorities.stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -37,6 +50,20 @@ public class JwtUtils implements Serializable {
         return claimsResolver.apply(claims);
     }
 
+    public boolean validateToken(String token) {
+        return !isTokenExpired(token);
+    }
+
+    public String generateToken(AppUser appUser) {
+        String authorities = appUser.getRoles().stream()
+                .map(role -> "ROLE_" + role.getNombre())
+                .collect(Collectors.joining(","));
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", appUser.getId().toString());
+        claims.put(JWT_AUTHORITIES_KEY, authorities);
+        return doGenerateToken(claims, appUser.getUsername());
+    }
+
     private Claims getAllClaimsFromToken(String token) {
         SecretKey key = getSecretKey();
         return Jwts.parserBuilder()
@@ -44,16 +71,6 @@ public class JwtUtils implements Serializable {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-    }
-
-    public boolean validateToken(String token) {
-        return !isTokenExpired(token);
-    }
-
-    public String generateToken(AppUser appUser) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("id", appUser.getId().toString());
-        return doGenerateToken(claims, appUser.getUsername());
     }
 
     private boolean isTokenExpired(String token) {
