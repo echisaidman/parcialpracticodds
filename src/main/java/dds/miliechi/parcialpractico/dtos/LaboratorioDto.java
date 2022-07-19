@@ -1,6 +1,6 @@
 package dds.miliechi.parcialpractico.dtos;
 
-import dds.miliechi.parcialpractico.entities.Empresa;
+import dds.miliechi.parcialpractico.entities.Laboratorio;
 import dds.miliechi.parcialpractico.entities.Medicamento;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,19 +13,19 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class EmpresaDto {
+public class LaboratorioDto {
     private UUID id;
     private String nombre;
     private List<MedicamentoDto> medicamentosDtos = new ArrayList<>();
 
-    public static EmpresaDto from(Empresa empresa) {
-        EmpresaDto empresaDto = new EmpresaDto();
-        empresaDto.setId(empresa.getId());
-        empresaDto.setNombre(empresa.getNombre());
-        for (Medicamento medicamento : empresa.getMedicamentos()) {
+    public static LaboratorioDto from(Laboratorio laboratorio) {
+        LaboratorioDto laboratorioDto = new LaboratorioDto();
+        laboratorioDto.setId(laboratorio.getId());
+        laboratorioDto.setNombre(laboratorio.getNombre());
+        for (Medicamento medicamento : laboratorio.getMedicamentos()) {
             MedicamentoDto medicamentoDto = MedicamentoDto.from(medicamento);
-            empresaDto.getMedicamentosDtos().add(medicamentoDto);
+            laboratorioDto.getMedicamentosDtos().add(medicamentoDto);
         }
-        return empresaDto;
+        return laboratorioDto;
     }
 }

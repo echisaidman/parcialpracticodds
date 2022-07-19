@@ -1,13 +1,13 @@
 package dds.miliechi.parcialpractico.services;
 
-import dds.miliechi.parcialpractico.dtos.EmpresaDto;
+import dds.miliechi.parcialpractico.dtos.LaboratorioDto;
 import dds.miliechi.parcialpractico.dtos.IdTextPair;
 import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
 import dds.miliechi.parcialpractico.entities.ComboMedicamentos;
-import dds.miliechi.parcialpractico.entities.Empresa;
+import dds.miliechi.parcialpractico.entities.Laboratorio;
 import dds.miliechi.parcialpractico.entities.Medicamento;
 import dds.miliechi.parcialpractico.entities.MedicamentoIndividual;
-import dds.miliechi.parcialpractico.repositories.EmpresaRepository;
+import dds.miliechi.parcialpractico.repositories.LaboratorioRepository;
 import dds.miliechi.parcialpractico.repositories.MedicamentoRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,46 +18,46 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class EmpresaService {
+public class LaboratorioService {
 
-    private final EmpresaRepository empresaRepository;
+    private final LaboratorioRepository laboratorioRepository;
     private final MedicamentoRepository medicamentoRepository;
     // private final MedicamentoService medicamentoService;
 
-    public EmpresaService(EmpresaRepository empresaRepository, MedicamentoRepository medicamentoRepository) {
-        this.empresaRepository = empresaRepository;
+    public LaboratorioService(LaboratorioRepository laboratorioRepository, MedicamentoRepository medicamentoRepository) {
+        this.laboratorioRepository = laboratorioRepository;
         // this.medicamentoService = medicamentoService;
         this.medicamentoRepository = medicamentoRepository;
     }
 
     @Transactional
-    public Optional<EmpresaDto> findByName(String name) {
-        Optional<Empresa> empresaOptional = empresaRepository.findByName(name);
-        return empresaOptional.map(EmpresaDto::from);
+    public Optional<LaboratorioDto> findByName(String name) {
+        Optional<Laboratorio> laboratorioOptional = laboratorioRepository.findByName(name);
+        return laboratorioOptional.map(LaboratorioDto::from);
     }
 
     @Transactional
-    public EmpresaDto findById(UUID id) {
-        return EmpresaDto.from(empresaRepository.findById(id));
+    public LaboratorioDto findById(UUID id) {
+        return LaboratorioDto.from(laboratorioRepository.findById(id));
     }
 
     @Transactional
-    public EmpresaDto save(EmpresaDto empresaDto) {
-        Empresa empresa = new Empresa();
-        empresa.setNombre(empresaDto.getNombre());
-        empresaRepository.save(empresa);
-        return EmpresaDto.from(empresa);
+    public LaboratorioDto save(LaboratorioDto laboratorioDto) {
+        Laboratorio laboratorio = new Laboratorio();
+        laboratorio.setNombre(laboratorioDto.getNombre());
+        laboratorioRepository.save(laboratorio);
+        return LaboratorioDto.from(laboratorio);
     }
 
     @Transactional
-    public List<EmpresaDto> list() {
-        List<Empresa> empresas = empresaRepository.list();
-        return empresas.stream().map(EmpresaDto::from).collect(Collectors.toList());
+    public List<LaboratorioDto> list() {
+        List<Laboratorio> laboratorios = laboratorioRepository.list();
+        return laboratorios.stream().map(LaboratorioDto::from).collect(Collectors.toList());
     }
 
     @Transactional
     public MedicamentoDto addNewMedicamento(MedicamentoDto medicamentoDto) {
-        Empresa empresa = empresaRepository.findById(medicamentoDto.getEmpresa().getId());
+        Laboratorio laboratorio = laboratorioRepository.findById(medicamentoDto.getLaboratorio().getId());
 
         Medicamento medicamento;
         if (medicamentoDto.getMedicamentos() == null || medicamentoDto.getMedicamentos().isEmpty()) {
@@ -77,7 +77,7 @@ public class EmpresaService {
         }
 
         medicamento.setNombre(medicamentoDto.getNombre());
-        empresa.addMedicamento(medicamento);
+        laboratorio.addMedicamento(medicamento);
         // return medicamentoService.save(medicamento);
         return MedicamentoDto.from(medicamento);
     }

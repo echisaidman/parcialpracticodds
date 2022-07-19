@@ -17,8 +17,8 @@ public abstract class Medicamento extends BaseEntity {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "empresa", nullable = false)
-    private Empresa empresa;
+    @JoinColumn(name = "laboratorio", nullable = false)
+    private Laboratorio laboratorio;
 
     public abstract double getPrecio();
 

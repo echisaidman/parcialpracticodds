@@ -4,7 +4,7 @@ import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
 import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
 import dds.miliechi.parcialpractico.entities.AppUser;
 import dds.miliechi.parcialpractico.security.IsAdmin;
-import dds.miliechi.parcialpractico.services.EmpresaService;
+import dds.miliechi.parcialpractico.services.LaboratorioService;
 import dds.miliechi.parcialpractico.services.MedicamentoService;
 import dds.miliechi.parcialpractico.services.UserService;
 import org.springframework.data.repository.query.Param;
@@ -20,19 +20,19 @@ import java.util.UUID;
 public class MedicamentoController {
 
     private final MedicamentoService medicamentoService;
-    private final EmpresaService empresaService;
+    private final LaboratorioService laboratorioService;
     private final UserService userService;
 
-    public MedicamentoController(MedicamentoService medicamentoService, EmpresaService empresaService, UserService userService) {
+    public MedicamentoController(MedicamentoService medicamentoService, LaboratorioService laboratorioService, UserService userService) {
         this.medicamentoService = medicamentoService;
-        this.empresaService = empresaService;
+        this.laboratorioService = laboratorioService;
         this.userService = userService;
     }
 
     @PostMapping
     @IsAdmin
     public ResponseEntity<MedicamentoDto> save(@RequestBody MedicamentoDto medicamentoDto) {
-        MedicamentoDto savedMedicamentoDto = empresaService.addNewMedicamento(medicamentoDto);
+        MedicamentoDto savedMedicamentoDto = laboratorioService.addNewMedicamento(medicamentoDto);
         return ResponseEntity.ok(savedMedicamentoDto);
     }
 

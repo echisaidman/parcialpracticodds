@@ -16,15 +16,15 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Empresa extends BaseEntity {
+public class Laboratorio extends BaseEntity {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "empresa", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "laboratorio", cascade = {CascadeType.ALL})
     private List<Medicamento> medicamentos = new ArrayList<>();
 
     public void addMedicamento(Medicamento medicamento) {
         medicamentos.add(medicamento);
-        medicamento.setEmpresa(this);
+        medicamento.setLaboratorio(this);
     }
 }

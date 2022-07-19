@@ -17,7 +17,7 @@ public class MedicamentoDto {
 
     private UUID id;
     private String nombre;
-    private IdTextPair empresa;
+    private IdTextPair laboratorio;
     private List<IdTextPair> medicamentos; // Los medicamentos del combo (en caso que este medicamento sea un Combo)
     private Double precio;
 
@@ -25,8 +25,8 @@ public class MedicamentoDto {
         MedicamentoDto medicamentoDto = new MedicamentoDto();
         medicamentoDto.setId(medicamento.getId());
         medicamentoDto.setNombre(medicamento.getNombre());
-        medicamentoDto.setEmpresa(
-                new IdTextPair(medicamento.getEmpresa().getId(), medicamento.getEmpresa().getNombre())
+        medicamentoDto.setLaboratorio(
+                new IdTextPair(medicamento.getLaboratorio().getId(), medicamento.getLaboratorio().getNombre())
         );
         medicamentoDto.setPrecio(medicamento.getPrecio());
 
