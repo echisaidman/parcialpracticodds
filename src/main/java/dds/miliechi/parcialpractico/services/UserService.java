@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -47,8 +48,8 @@ public class UserService {
     }
 
     @Transactional
-    public double calcularBMI(String username, CalculadoraBMI calculadoraBMI) throws IOException {
-        AppUser appUser = findByUsername(username).get();
+    public double calcularBMI(UUID id, CalculadoraBMI calculadoraBMI) throws IOException {
+        AppUser appUser = userRepository.findById(id);
         double alturaEnMetros = appUser.getAltura() / 100;
         return calculadoraBMI.calcular(alturaEnMetros, appUser.getPeso());
     }

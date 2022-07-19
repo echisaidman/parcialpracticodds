@@ -1,16 +1,21 @@
 package dds.miliechi.parcialpractico.services;
 
 import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
+import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
+import dds.miliechi.parcialpractico.entities.Comentario;
 import dds.miliechi.parcialpractico.entities.Medicamento;
 import dds.miliechi.parcialpractico.repositories.MedicamentoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class MedicamentoService {
 
     private final MedicamentoRepository medicamentoRepository;
@@ -34,6 +39,20 @@ public class MedicamentoService {
     public MedicamentoDto save(Medicamento medicamento) {
         medicamentoRepository.save(medicamento);
         return MedicamentoDto.from(medicamento);
+    }
+
+    @Transactional
+    public void publicarComentario(PublicarComentarioRequest request, UUID idUsuario) {
+        Comentario comentario = new Comentario.Builder()
+                .idUsuario(idUsuario)
+                .idMedicamento(request.getIdMedicamento())
+                .titulo(request.getTitulo())
+                .descripcion(request.getDescripcion())
+                .fechaPublicacion(LocalDateTime.now())
+                .idComentarioPadre(request.getIdComentarioPadre())
+                .build();
+        // Aca iria la parte de persistencia con la BD NoSQL, que no la implementamos
+        log.debug("Comentario publicado: " + comentario.toString());
     }
 
 }
