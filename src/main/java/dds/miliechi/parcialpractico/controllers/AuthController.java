@@ -4,6 +4,7 @@ import dds.miliechi.parcialpractico.dtos.LoginRequest;
 import dds.miliechi.parcialpractico.dtos.LoginResponse;
 import dds.miliechi.parcialpractico.dtos.RegisterRequest;
 import dds.miliechi.parcialpractico.entities.AppUser;
+import dds.miliechi.parcialpractico.security.IsAdmin;
 import dds.miliechi.parcialpractico.security.JwtUtils;
 import dds.miliechi.parcialpractico.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,17 @@ public class AuthController {
         }
 
         userService.save(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/registerAdmin")
+    @IsAdmin
+    public ResponseEntity<?> registerAdmin(@RequestBody RegisterRequest request) {
+        if (userService.findByUsername(request.getUsername()).isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        userService.saveAdmin(request);
         return ResponseEntity.ok().build();
     }
 

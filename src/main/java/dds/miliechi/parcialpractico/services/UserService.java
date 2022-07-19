@@ -41,12 +41,14 @@ public class UserService {
 
     @Transactional
     public AppUser save(RegisterRequest request) {
-        AppUser appUser = new AppUser();
-        appUser.setUsername(request.getUsername());
-        appUser.setPassword(passwordEncoder.encode(request.getPassword()));
-        appUser.setAltura(request.getAltura());
-        appUser.setPeso(request.getPeso());
-        appUser.addRole(roleRepository.findByRoleName("USER").get());
+        AppUser appUser = buildBaseAppUserFromRequest(request);
+        return save(appUser);
+    }
+
+    @Transactional
+    public AppUser saveAdmin(RegisterRequest request) {
+        AppUser appUser = buildBaseAppUserFromRequest(request);
+        appUser.addRole(roleRepository.findByRoleName("ADMIN").get());
         return save(appUser);
     }
 
@@ -70,5 +72,15 @@ public class UserService {
     @Transactional
     public boolean existsUserWithAdminRole() {
         return userRepository.existsUserWithAdminRole();
+    }
+
+    private AppUser buildBaseAppUserFromRequest(RegisterRequest request) {
+        AppUser appUser = new AppUser();
+        appUser.setUsername(request.getUsername());
+        appUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        appUser.setAltura(request.getAltura());
+        appUser.setPeso(request.getPeso());
+        appUser.addRole(roleRepository.findByRoleName("USER").get());
+        return appUser;
     }
 }

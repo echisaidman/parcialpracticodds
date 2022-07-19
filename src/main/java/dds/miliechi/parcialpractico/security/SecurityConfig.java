@@ -47,8 +47,8 @@ public class SecurityConfig {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll() // Los endpoint de auth son publicos
-                .anyRequest().authenticated(); // Cualquier otro endpoint es privado
+                .antMatchers("/api/auth/login", "/api/auth/register").permitAll() // Endpoints publicos
+                .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
