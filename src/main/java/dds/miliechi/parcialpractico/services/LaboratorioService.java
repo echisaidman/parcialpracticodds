@@ -72,7 +72,7 @@ public class LaboratorioService {
                     .collect(Collectors.toList());
             for (UUID idComponente : idsMedicamentosComponentes) {
                 Medicamento medicamentoComponente = medicamentoRepository.findById(idComponente);
-                ((ComboMedicamentos) medicamento).getMedicamentos().add(medicamentoComponente);
+                ((ComboMedicamentos) medicamento).addMedicamento(medicamentoComponente);
             }
         }
 

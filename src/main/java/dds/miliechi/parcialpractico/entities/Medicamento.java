@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Medicamento")
 @Table(name = "medicamentos")
@@ -20,6 +22,9 @@ public abstract class Medicamento extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "laboratorio", nullable = false, foreignKey = @ForeignKey(name = "FK_Medicamento_Id_Laboratorio_Id"))
     private Laboratorio laboratorio;
+
+    @Transient
+    private List<Comentario> comentarios = new ArrayList<>();
 
     public abstract double getPrecio();
 

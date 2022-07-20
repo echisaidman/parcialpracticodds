@@ -33,4 +33,8 @@ public class ComboMedicamentos extends Medicamento {
         double precioTotalComponentes = medicamentos.stream().mapToDouble(Medicamento::getPrecio).sum();
         return precioTotalComponentes * (100 - PORCENTAJE_DESCUENTO_COMBO) / 100;
     }
+
+    public void addMedicamento(Medicamento medicamento) {
+        medicamentos.add(medicamento);
+    }
 }
