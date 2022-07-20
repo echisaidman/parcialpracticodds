@@ -17,19 +17,10 @@ public class LaboratorioRepository implements dds.miliechi.parcialpractico.repos
         this.entityManager = entityManager;
     }
 
-    @Override
     public List<Laboratorio> list() {
         String sql = "from Laboratorio l";
         return entityManager.createQuery(sql, Laboratorio.class)
                 .getResultList();
-    }
-
-    public Optional<Laboratorio> findByName(String name) {
-        String sql = "from Laboratorio l where l.nombre = :nombre";
-        return entityManager.createQuery(sql, Laboratorio.class)
-                .setParameter("nombre", name)
-                .getResultStream()
-                .findFirst();
     }
 
     @Override

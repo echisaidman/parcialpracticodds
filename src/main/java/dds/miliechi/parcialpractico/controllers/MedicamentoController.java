@@ -48,9 +48,10 @@ public class MedicamentoController {
     }
 
     @PostMapping("/publicarComentario")
-    public void publicarComentario(@RequestBody PublicarComentarioRequest request, Principal currentUserUsername) {
+    public ResponseEntity<?> publicarComentario(@RequestBody PublicarComentarioRequest request, Principal currentUserUsername) {
         AppUser currentUser = userService.findByUsername(currentUserUsername.getName()).get();
         medicamentoService.publicarComentario(request, currentUser.getId());
+        return ResponseEntity.ok().build();
     }
 
 }

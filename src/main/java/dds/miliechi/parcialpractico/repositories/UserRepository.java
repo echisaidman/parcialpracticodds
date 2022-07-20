@@ -17,13 +17,6 @@ public class UserRepository implements dds.miliechi.parcialpractico.repositories
         this.entityManager = entityManager;
     }
 
-    @Override
-    public List<AppUser> list() {
-        String sql = "from AppUser u";
-        return entityManager.createQuery(sql, AppUser.class)
-                .getResultList();
-    }
-
     public Optional<AppUser> findByUsername(String username) {
         String sql = "from AppUser u where u.username = :username";
         return entityManager.createQuery(sql, AppUser.class)

@@ -31,12 +31,6 @@ public class LaboratorioService {
     }
 
     @Transactional
-    public Optional<LaboratorioDto> findByName(String name) {
-        Optional<Laboratorio> laboratorioOptional = laboratorioRepository.findByName(name);
-        return laboratorioOptional.map(LaboratorioDto::from);
-    }
-
-    @Transactional
     public LaboratorioDto findById(UUID id) {
         return LaboratorioDto.from(laboratorioRepository.findById(id));
     }

@@ -17,13 +17,6 @@ public class RoleRepository implements dds.miliechi.parcialpractico.repositories
         this.entityManager = entityManager;
     }
 
-    @Override
-    public List<AppRole> list() {
-        String sql = "from AppRole role";
-        return entityManager.createQuery(sql, AppRole.class)
-                .getResultList();
-    }
-
     public Optional<AppRole> findByRoleName(String roleName) {
         String sql = "from AppRole role where role.nombre = :roleName";
         return entityManager.createQuery(sql, AppRole.class)

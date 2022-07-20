@@ -8,8 +8,6 @@ import java.util.UUID;
 public interface Repository<TEntity extends BaseEntity> {
     TEntity findById(UUID id);
 
-    List<TEntity> list();
-
     void save(TEntity entity);
 
     TEntity merge(TEntity entity);

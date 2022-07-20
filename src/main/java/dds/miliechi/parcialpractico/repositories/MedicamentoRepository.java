@@ -17,19 +17,10 @@ public class MedicamentoRepository implements dds.miliechi.parcialpractico.repos
         this.entityManager = entityManager;
     }
 
-    @Override
     public List<Medicamento> list() {
         String sql = "from Medicamento m";
         return entityManager.createQuery(sql, Medicamento.class)
                 .getResultList();
-    }
-
-    public Optional<Medicamento> findByName(String name) {
-        String sql = "from Medicamento m where m.nombre = :nombre";
-        return entityManager.createQuery(sql, Medicamento.class)
-                .setParameter("nombre", name)
-                .getResultStream()
-                .findFirst();
     }
 
     @Override
