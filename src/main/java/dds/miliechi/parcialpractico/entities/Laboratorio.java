@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
+@Entity(name = "Laboratorio")
+@Table(name = "laboratorios")
 @Getter
 @Setter
 @NoArgsConstructor

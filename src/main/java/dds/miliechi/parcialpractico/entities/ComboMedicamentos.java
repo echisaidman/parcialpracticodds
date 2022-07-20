@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Entity(name = "ComboMedicamento")
 @DiscriminatorValue(value = "COMBO")
 @Getter
 @Setter
@@ -22,7 +22,9 @@ public class ComboMedicamentos extends Medicamento {
     @JoinTable(
             name = "medicamentos_por_combo",
             joinColumns = @JoinColumn(name = "combo_medicamento"),
-            inverseJoinColumns = @JoinColumn(name = "medicamento")
+            inverseJoinColumns = @JoinColumn(name = "medicamento"),
+            foreignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_ComboMedicamento_Medicamentos_Id"),
+            inverseForeignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_Medicamento_Medicamentos_Id")
     )
     private List<Medicamento> medicamentos = new ArrayList<>();
 

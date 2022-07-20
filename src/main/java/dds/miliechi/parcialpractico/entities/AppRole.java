@@ -8,8 +8,8 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table
+@Entity(name = "AppRole")
+@Table(name = "app_roles")
 @Getter
 @Setter
 @NoArgsConstructor

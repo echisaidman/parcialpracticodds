@@ -8,8 +8,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
+@Entity(name = "AppUser")
+@Table(name = "app_users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +24,9 @@ public class AppUser extends BaseEntity {
     @JoinTable(
             name = "roles_por_usuario",
             joinColumns = @JoinColumn(name = "usuario"),
-            inverseJoinColumns = @JoinColumn(name = "rol")
+            inverseJoinColumns = @JoinColumn(name = "rol"),
+            foreignKey = @ForeignKey(name = "FK_RolesPorUsuario_Usuario_AppUsers_Id"),
+            inverseForeignKey = @ForeignKey(name = "FK_RolesPorUsuario_Rol_AppRoles_Id")
     )
     private List<AppRole> roles = new ArrayList<>();
 
