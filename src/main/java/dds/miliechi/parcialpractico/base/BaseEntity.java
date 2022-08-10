@@ -3,9 +3,10 @@ package dds.miliechi.parcialpractico.base;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.util.UUID;
 
 @MappedSuperclass
 @Getter
@@ -13,6 +14,7 @@ import java.util.UUID;
 public abstract class BaseEntity {
 
     @Id
-    protected UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected long id;
 
 }

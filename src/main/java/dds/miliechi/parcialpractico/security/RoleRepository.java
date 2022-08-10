@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class RoleRepository implements BaseRepository<AppRole> {
@@ -25,7 +24,7 @@ public class RoleRepository implements BaseRepository<AppRole> {
     }
 
     @Override
-    public AppRole findById(UUID id) {
+    public AppRole findById(long id) {
         String sql = "select role from AppRole role where role.id = :id";
         return entityManager.createQuery(sql, AppRole.class)
                 .setParameter("id", id)

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class ComentarioRepository implements BaseRepository<Comentario> {
@@ -23,7 +22,7 @@ public class ComentarioRepository implements BaseRepository<Comentario> {
     }
 
     @Override
-    public Comentario findById(UUID id) {
+    public Comentario findById(long id) {
         String sql = "select c from Comentario c where c.id = :id";
         return entityManager.createQuery(sql, Comentario.class)
                 .setParameter("id", id)

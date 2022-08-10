@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/medicamentos")
@@ -41,7 +40,7 @@ public class MedicamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MedicamentoDto> getById(@Param("id") UUID id) {
+    public ResponseEntity<MedicamentoDto> getById(@Param("id") long id) {
         return ResponseEntity.ok(medicamentoService.findById(id));
     }
 

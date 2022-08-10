@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
@@ -33,7 +32,7 @@ public class UserController {
         } else {
             calculadoraBMI = new CalculadoraExternaBMI();
         }
-        UUID idUsuario = userService.findByUsername(currentUserUsername.getName()).get().getId();
+        long idUsuario = userService.findByUsername(currentUserUsername.getName()).get().getId();
         double bmi = userService.calcularBMI(idUsuario, calculadoraBMI);
         return ResponseEntity.ok(new CalcularBMIResponse(bmi));
     }

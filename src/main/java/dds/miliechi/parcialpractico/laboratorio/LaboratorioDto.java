@@ -8,13 +8,12 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class LaboratorioDto {
-    private UUID id;
+    private long id;
     private String nombre;
     private List<MedicamentoDto> medicamentosDtos = new ArrayList<>();
 

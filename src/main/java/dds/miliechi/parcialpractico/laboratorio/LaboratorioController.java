@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/laboratorios")
@@ -32,7 +31,7 @@ public class LaboratorioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LaboratorioDto> getById(@Param("id") UUID id) {
+    public ResponseEntity<LaboratorioDto> getById(@Param("id") long id) {
         return ResponseEntity.ok(laboratorioService.findById(id));
     }
 

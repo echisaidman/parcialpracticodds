@@ -58,7 +58,7 @@ public class JwtUtils implements Serializable {
                 .map(role -> "ROLE_" + role.getNombre())
                 .collect(Collectors.joining(","));
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", appUser.getId().toString());
+        claims.put("id", ((Long) appUser.getId()).toString());
         claims.put(JWT_AUTHORITIES_KEY, authorities);
         return doGenerateToken(claims, appUser.getUsername());
     }

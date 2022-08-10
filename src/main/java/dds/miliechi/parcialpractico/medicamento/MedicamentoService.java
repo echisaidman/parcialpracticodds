@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,7 +23,7 @@ public class MedicamentoService {
     }
 
     @Transactional
-    public MedicamentoDto findById(UUID id) {
+    public MedicamentoDto findById(long id) {
         return MedicamentoDto.from(medicamentoRepository.findById(id));
     }
 

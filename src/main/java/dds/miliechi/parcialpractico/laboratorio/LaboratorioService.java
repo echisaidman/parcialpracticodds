@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +22,7 @@ public class LaboratorioService {
     }
 
     @Transactional
-    public LaboratorioDto findById(UUID id) {
+    public LaboratorioDto findById(long id) {
         return LaboratorioDto.from(laboratorioRepository.findById(id));
     }
 
@@ -53,10 +52,10 @@ public class LaboratorioService {
         } else {
             // Si tiene Medicamentos, es un ComboMedicamentos
             medicamento = new ComboMedicamentos();
-            List<UUID> idsMedicamentosComponentes = medicamentoDto.getMedicamentos().stream()
+            List<Long> idsMedicamentosComponentes = medicamentoDto.getMedicamentos().stream()
                     .map(IdTextPair::getId)
                     .collect(Collectors.toList());
-            for (UUID idComponente : idsMedicamentosComponentes) {
+            for (long idComponente : idsMedicamentosComponentes) {
                 Medicamento medicamentoComponente = medicamentoRepository.findById(idComponente);
                 ((ComboMedicamentos) medicamento).addMedicamento(medicamentoComponente);
             }

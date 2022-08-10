@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.Optional;
-import java.util.UUID;
 
 @Repository
 public class UserRepository implements BaseRepository<AppUser> {
@@ -25,7 +24,7 @@ public class UserRepository implements BaseRepository<AppUser> {
     }
 
     @Override
-    public AppUser findById(UUID id) {
+    public AppUser findById(long id) {
         String sql = "select u from AppUser u where u.id = :id";
         return entityManager.createQuery(sql, AppUser.class)
                 .setParameter("id", id)

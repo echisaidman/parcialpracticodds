@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Getter
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class MedicamentoDto {
 
-    private UUID id;
+    private long id;
     private String nombre;
     private IdTextPair laboratorio;
     private List<IdTextPair> medicamentos; // Los medicamentos del combo (en caso que este medicamento sea un Combo)

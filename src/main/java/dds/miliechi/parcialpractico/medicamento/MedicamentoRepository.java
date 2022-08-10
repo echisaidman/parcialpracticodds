@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class MedicamentoRepository implements BaseRepository<Medicamento> {
@@ -23,7 +22,7 @@ public class MedicamentoRepository implements BaseRepository<Medicamento> {
     }
 
     @Override
-    public Medicamento findById(UUID id) {
+    public Medicamento findById(long id) {
         String sql = "select m from Medicamento m where m.id = :id";
         return entityManager.createQuery(sql, Medicamento.class)
                 .setParameter("id", id)
