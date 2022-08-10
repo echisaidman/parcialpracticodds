@@ -1,6 +1,7 @@
 package dds.miliechi.parcialpractico.medicamento;
 
 import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
+import dds.miliechi.parcialpractico.security.AppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,11 @@ import java.util.stream.Collectors;
 public class MedicamentoService {
 
     private final MedicamentoRepository medicamentoRepository;
+    private final ComentarioRepository comentarioRepository;
 
-    public MedicamentoService(MedicamentoRepository medicamentoRepository) {
+    public MedicamentoService(MedicamentoRepository medicamentoRepository, ComentarioRepository comentarioRepository) {
         this.medicamentoRepository = medicamentoRepository;
+        this.comentarioRepository = comentarioRepository;
     }
 
     @Transactional
@@ -38,17 +41,23 @@ public class MedicamentoService {
     }
 
     @Transactional
-    public void publicarComentario(PublicarComentarioRequest request, UUID idUsuario) {
-        Comentario comentario = new Comentario.Builder()
-                .idUsuario(idUsuario)
-                .idMedicamento(request.getIdMedicamento())
-                .titulo(request.getTitulo())
-                .descripcion(request.getDescripcion())
-                .fechaPublicacion(LocalDateTime.now())
-                .idComentarioPadre(request.getIdComentarioPadre())
-                .build();
-        // Aca iria la parte de persistencia con la BD NoSQL, que no la implementamos
-        log.debug("Comentario publicado: " + comentario.toString());
+    public void publicarComentario(PublicarComentarioRequest request, AppUser usuario) {
+        Medicamento medicamento = medicamentoRepository.findById(request.getIdMedicamento());
+
+        Comentario.Builder comentarioBuilder = new Comentario.Builder()
+                .setUsuario(usuario)
+                .setMedicamento(medicamento)
+                .setTitulo(request.getTitulo())
+                .setDescripcion(request.getDescripcion())
+                .setFechaPublicacion(LocalDateTime.now());
+
+        if (request.getIdComentarioPadre() != null) {
+            comentarioBuilder.setComentarioPadre(comentarioRepository.findById(request.getIdComentarioPadre()));
+        }
+
+        Comentario comentario = comentarioBuilder.build();
+        medicamento.addComentario(comentario);
+        medicamentoRepository.merge(medicamento);
     }
 
 }

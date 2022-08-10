@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "ComboMedicamento")
+@Entity(name = "ComboMedicamentos")
 @DiscriminatorValue(value = "COMBO")
 @Getter
 @Setter
@@ -23,15 +23,15 @@ public class ComboMedicamentos extends Medicamento {
             name = "medicamentos_por_combo",
             joinColumns = @JoinColumn(name = "combo_medicamento"),
             inverseJoinColumns = @JoinColumn(name = "medicamento"),
-            foreignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_ComboMedicamento_Medicamentos_Id"),
-            inverseForeignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_Medicamento_Medicamentos_Id")
+            foreignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_ComboMedicamento"),
+            inverseForeignKey = @ForeignKey(name = "FK_MedicamentosPorCombo_Medicamento")
     )
     private List<Medicamento> medicamentos = new ArrayList<>();
 
     @Override
     public double getPrecio() {
         double precioTotalComponentes = medicamentos.stream().mapToDouble(Medicamento::getPrecio).sum();
-        return precioTotalComponentes * (100 - PORCENTAJE_DESCUENTO_COMBO) / 100;
+        return precioTotalComponentes - (precioTotalComponentes * PORCENTAJE_DESCUENTO_COMBO / 100);
     }
 
     public void addMedicamento(Medicamento medicamento) {

@@ -22,11 +22,16 @@ public abstract class Medicamento extends BaseEntity {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "laboratorio", nullable = false, foreignKey = @ForeignKey(name = "FK_Medicamento_Id_Laboratorio_Id"))
+    @JoinColumn(name = "laboratorio", nullable = false, foreignKey = @ForeignKey(name = "FK_Medicamentos_Laboratorio"))
     private Laboratorio laboratorio;
 
-    @Transient
+    @OneToMany(mappedBy = "medicamento", cascade = {CascadeType.ALL})
     private List<Comentario> comentarios = new ArrayList<>();
+
+    public void addComentario(Comentario comentario) {
+        comentarios.add(comentario);
+        comentario.setMedicamento(this);
+    }
 
     public abstract double getPrecio();
 

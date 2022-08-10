@@ -26,8 +26,8 @@ public class AppUser extends BaseEntity {
             name = "roles_por_usuario",
             joinColumns = @JoinColumn(name = "usuario"),
             inverseJoinColumns = @JoinColumn(name = "rol"),
-            foreignKey = @ForeignKey(name = "FK_RolesPorUsuario_Usuario_AppUsers_Id"),
-            inverseForeignKey = @ForeignKey(name = "FK_RolesPorUsuario_Rol_AppRoles_Id")
+            foreignKey = @ForeignKey(name = "FK_RolesPorUsuario_Usuario"),
+            inverseForeignKey = @ForeignKey(name = "FK_RolesPorUsuario_Rol")
     )
     private List<AppRole> roles = new ArrayList<>();
 
