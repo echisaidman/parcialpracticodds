@@ -4,7 +4,6 @@ import dds.miliechi.parcialpractico.entities.AppRole;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public class RoleRepository implements dds.miliechi.parcialpractico.repositories
     }
 
     public Optional<AppRole> findByRoleName(String roleName) {
-        String sql = "from AppRole role where role.nombre = :roleName";
+        String sql = "select role from AppRole role where role.nombre = :roleName";
         return entityManager.createQuery(sql, AppRole.class)
                 .setParameter("roleName", roleName)
                 .getResultStream()
@@ -27,7 +26,7 @@ public class RoleRepository implements dds.miliechi.parcialpractico.repositories
 
     @Override
     public AppRole findById(UUID id) {
-        String sql = "from AppRole role where role.id = :id";
+        String sql = "select role from AppRole role where role.id = :id";
         return entityManager.createQuery(sql, AppRole.class)
                 .setParameter("id", id)
                 .getResultStream()

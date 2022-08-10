@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -18,14 +17,14 @@ public class LaboratorioRepository implements dds.miliechi.parcialpractico.repos
     }
 
     public List<Laboratorio> list() {
-        String sql = "from Laboratorio l";
+        String sql = "select l from Laboratorio l";
         return entityManager.createQuery(sql, Laboratorio.class)
                 .getResultList();
     }
 
     @Override
     public Laboratorio findById(UUID id) {
-        String sql = "from Laboratorio l where l.id = :id";
+        String sql = "select l from Laboratorio l where l.id = :id";
         return entityManager.createQuery(sql, Laboratorio.class)
                 .setParameter("id", id)
                 .getSingleResult();

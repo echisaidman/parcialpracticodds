@@ -4,7 +4,6 @@ import dds.miliechi.parcialpractico.entities.AppUser;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public class UserRepository implements dds.miliechi.parcialpractico.repositories
     }
 
     public Optional<AppUser> findByUsername(String username) {
-        String sql = "from AppUser u where u.username = :username";
+        String sql = "select u from AppUser u where u.username = :username";
         return entityManager.createQuery(sql, AppUser.class)
                 .setParameter("username", username)
                 .getResultStream()
@@ -27,7 +26,7 @@ public class UserRepository implements dds.miliechi.parcialpractico.repositories
 
     @Override
     public AppUser findById(UUID id) {
-        String sql = "from AppUser u where u.id = :id";
+        String sql = "select u from AppUser u where u.id = :id";
         return entityManager.createQuery(sql, AppUser.class)
                 .setParameter("id", id)
                 .getResultStream()
