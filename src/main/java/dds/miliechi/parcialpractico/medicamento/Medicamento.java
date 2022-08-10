@@ -1,5 +1,7 @@
-package dds.miliechi.parcialpractico.entities;
+package dds.miliechi.parcialpractico.medicamento;
 
+import dds.miliechi.parcialpractico.base.BaseEntity;
+import dds.miliechi.parcialpractico.laboratorio.Laboratorio;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,7 +1,5 @@
 package dds.miliechi.parcialpractico.security;
 
-import dds.miliechi.parcialpractico.entities.AppUser;
-import dds.miliechi.parcialpractico.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

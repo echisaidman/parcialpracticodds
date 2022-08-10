@@ -1,10 +1,10 @@
 package dds.miliechi.parcialpractico;
 
 import dds.miliechi.parcialpractico.dtos.RegisterRequest;
-import dds.miliechi.parcialpractico.entities.AppRole;
-import dds.miliechi.parcialpractico.entities.AppUser;
-import dds.miliechi.parcialpractico.services.RoleService;
-import dds.miliechi.parcialpractico.services.UserService;
+import dds.miliechi.parcialpractico.security.AppRole;
+import dds.miliechi.parcialpractico.security.AppUser;
+import dds.miliechi.parcialpractico.security.RoleService;
+import dds.miliechi.parcialpractico.security.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

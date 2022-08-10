@@ -1,5 +1,6 @@
-package dds.miliechi.parcialpractico.entities;
+package dds.miliechi.parcialpractico.security;
 
+import dds.miliechi.parcialpractico.base.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

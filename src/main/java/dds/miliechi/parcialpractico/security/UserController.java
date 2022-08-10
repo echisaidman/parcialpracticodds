@@ -1,11 +1,10 @@
-package dds.miliechi.parcialpractico.controllers;
+package dds.miliechi.parcialpractico.security;
 
 import dds.miliechi.parcialpractico.apis.AdapterCalculadoraInternaBMI;
 import dds.miliechi.parcialpractico.apis.CalculadoraBMI;
 import dds.miliechi.parcialpractico.apis.CalculadoraExternaBMI;
 import dds.miliechi.parcialpractico.dtos.CalcularBMIRequest;
 import dds.miliechi.parcialpractico.dtos.CalcularBMIResponse;
-import dds.miliechi.parcialpractico.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;

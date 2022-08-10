@@ -1,7 +1,6 @@
-package dds.miliechi.parcialpractico.dtos;
+package dds.miliechi.parcialpractico.medicamento;
 
-import dds.miliechi.parcialpractico.entities.ComboMedicamentos;
-import dds.miliechi.parcialpractico.entities.Medicamento;
+import dds.miliechi.parcialpractico.dtos.IdTextPair;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

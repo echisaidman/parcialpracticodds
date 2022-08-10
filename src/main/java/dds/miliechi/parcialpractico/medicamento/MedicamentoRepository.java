@@ -1,6 +1,6 @@
-package dds.miliechi.parcialpractico.repositories;
+package dds.miliechi.parcialpractico.medicamento;
 
-import dds.miliechi.parcialpractico.entities.Medicamento;
+import dds.miliechi.parcialpractico.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class MedicamentoRepository implements dds.miliechi.parcialpractico.repositories.Repository<Medicamento> {
+public class MedicamentoRepository implements BaseRepository<Medicamento> {
 
     private final EntityManager entityManager;
 

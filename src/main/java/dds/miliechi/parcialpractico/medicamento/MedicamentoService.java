@@ -1,10 +1,6 @@
-package dds.miliechi.parcialpractico.services;
+package dds.miliechi.parcialpractico.medicamento;
 
-import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
 import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
-import dds.miliechi.parcialpractico.entities.Comentario;
-import dds.miliechi.parcialpractico.entities.Medicamento;
-import dds.miliechi.parcialpractico.repositories.MedicamentoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

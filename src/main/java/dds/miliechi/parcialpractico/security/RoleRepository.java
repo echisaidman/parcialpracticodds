@@ -1,6 +1,6 @@
-package dds.miliechi.parcialpractico.repositories;
+package dds.miliechi.parcialpractico.security;
 
-import dds.miliechi.parcialpractico.entities.AppRole;
+import dds.miliechi.parcialpractico.base.BaseRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class RoleRepository implements dds.miliechi.parcialpractico.repositories.Repository<AppRole> {
+public class RoleRepository implements BaseRepository<AppRole> {
 
     private final EntityManager entityManager;
 

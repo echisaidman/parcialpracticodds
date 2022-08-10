@@ -1,12 +1,10 @@
-package dds.miliechi.parcialpractico.controllers;
+package dds.miliechi.parcialpractico.medicamento;
 
-import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
 import dds.miliechi.parcialpractico.dtos.PublicarComentarioRequest;
-import dds.miliechi.parcialpractico.entities.AppUser;
+import dds.miliechi.parcialpractico.laboratorio.LaboratorioService;
+import dds.miliechi.parcialpractico.security.AppUser;
 import dds.miliechi.parcialpractico.security.IsAdmin;
-import dds.miliechi.parcialpractico.services.LaboratorioService;
-import dds.miliechi.parcialpractico.services.MedicamentoService;
-import dds.miliechi.parcialpractico.services.UserService;
+import dds.miliechi.parcialpractico.security.UserService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

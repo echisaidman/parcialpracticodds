@@ -1,7 +1,5 @@
-package dds.miliechi.parcialpractico.services;
+package dds.miliechi.parcialpractico.security;
 
-import dds.miliechi.parcialpractico.entities.AppRole;
-import dds.miliechi.parcialpractico.repositories.RoleRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

@@ -1,12 +1,8 @@
-package dds.miliechi.parcialpractico.controllers;
+package dds.miliechi.parcialpractico.security;
 
 import dds.miliechi.parcialpractico.dtos.LoginRequest;
 import dds.miliechi.parcialpractico.dtos.LoginResponse;
 import dds.miliechi.parcialpractico.dtos.RegisterRequest;
-import dds.miliechi.parcialpractico.entities.AppUser;
-import dds.miliechi.parcialpractico.security.IsAdmin;
-import dds.miliechi.parcialpractico.security.JwtUtils;
-import dds.miliechi.parcialpractico.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

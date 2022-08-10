@@ -1,7 +1,7 @@
-package dds.miliechi.parcialpractico.dtos;
+package dds.miliechi.parcialpractico.laboratorio;
 
-import dds.miliechi.parcialpractico.entities.Laboratorio;
-import dds.miliechi.parcialpractico.entities.Medicamento;
+import dds.miliechi.parcialpractico.medicamento.Medicamento;
+import dds.miliechi.parcialpractico.medicamento.MedicamentoDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

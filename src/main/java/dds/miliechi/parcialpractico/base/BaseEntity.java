@@ -1,4 +1,4 @@
-package dds.miliechi.parcialpractico.entities;
+package dds.miliechi.parcialpractico.base;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,10 +1,7 @@
-package dds.miliechi.parcialpractico.services;
+package dds.miliechi.parcialpractico.security;
 
 import dds.miliechi.parcialpractico.apis.CalculadoraBMI;
 import dds.miliechi.parcialpractico.dtos.RegisterRequest;
-import dds.miliechi.parcialpractico.entities.AppUser;
-import dds.miliechi.parcialpractico.repositories.RoleRepository;
-import dds.miliechi.parcialpractico.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

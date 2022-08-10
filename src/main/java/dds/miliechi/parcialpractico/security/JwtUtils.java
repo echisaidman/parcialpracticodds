@@ -1,6 +1,5 @@
 package dds.miliechi.parcialpractico.security;
 
-import dds.miliechi.parcialpractico.entities.AppUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

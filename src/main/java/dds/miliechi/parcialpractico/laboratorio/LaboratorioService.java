@@ -1,19 +1,11 @@
-package dds.miliechi.parcialpractico.services;
+package dds.miliechi.parcialpractico.laboratorio;
 
-import dds.miliechi.parcialpractico.dtos.LaboratorioDto;
 import dds.miliechi.parcialpractico.dtos.IdTextPair;
-import dds.miliechi.parcialpractico.dtos.MedicamentoDto;
-import dds.miliechi.parcialpractico.entities.ComboMedicamentos;
-import dds.miliechi.parcialpractico.entities.Laboratorio;
-import dds.miliechi.parcialpractico.entities.Medicamento;
-import dds.miliechi.parcialpractico.entities.MedicamentoIndividual;
-import dds.miliechi.parcialpractico.repositories.LaboratorioRepository;
-import dds.miliechi.parcialpractico.repositories.MedicamentoRepository;
+import dds.miliechi.parcialpractico.medicamento.*;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
