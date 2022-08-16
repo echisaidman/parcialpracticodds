@@ -8,3 +8,4 @@
 
 ### Notas
 - Es necesario crear la BD `parcialpracticodds` antes de ejecutar el proyecto (las tablas despues las crea Hibernate automáticamente, pero necesita que la BD ya esté creada)
+- Si al hacer una request devuelve "Forbidden" o algo similar, es porque primero hay que hacer una request a `api/auth/login` para obtener el JWT
