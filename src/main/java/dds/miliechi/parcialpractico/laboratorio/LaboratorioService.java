@@ -13,11 +13,12 @@ public class LaboratorioService {
 
     private final LaboratorioRepository laboratorioRepository;
     private final MedicamentoRepository medicamentoRepository;
-    // private final MedicamentoService medicamentoService;
+    private final MedicamentoService medicamentoService;
 
-    public LaboratorioService(LaboratorioRepository laboratorioRepository, MedicamentoRepository medicamentoRepository) {
+    public LaboratorioService(LaboratorioRepository laboratorioRepository, MedicamentoRepository medicamentoRepository,
+                              MedicamentoService medicamentoService) {
         this.laboratorioRepository = laboratorioRepository;
-        // this.medicamentoService = medicamentoService;
+        this.medicamentoService = medicamentoService;
         this.medicamentoRepository = medicamentoRepository;
     }
 
@@ -63,7 +64,7 @@ public class LaboratorioService {
 
         medicamento.setNombre(medicamentoDto.getNombre());
         laboratorio.addMedicamento(medicamento);
-        // return medicamentoService.save(medicamento);
-        return MedicamentoDto.from(medicamento);
+        return medicamentoService.save(medicamento);
+        // return MedicamentoDto.from(medicamento);
     }
 }

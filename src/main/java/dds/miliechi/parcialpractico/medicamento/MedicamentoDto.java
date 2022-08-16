@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,9 @@ public class MedicamentoDto {
     private long id;
     private String nombre;
     private IdTextPair laboratorio;
-    private List<IdTextPair> medicamentos; // Los medicamentos del combo (en caso que este medicamento sea un Combo)
+    private List<IdTextPair> medicamentos = new ArrayList<>(); // Los medicamentos del combo (en caso que este medicamento sea un Combo)
     private Double precio;
+    private List<ComentarioDto> comentarios = new ArrayList<>();
 
     public static MedicamentoDto from(Medicamento medicamento) {
         MedicamentoDto medicamentoDto = new MedicamentoDto();
@@ -35,6 +37,14 @@ public class MedicamentoDto {
                             .map(m -> new IdTextPair(m.getId(), m.getNombre()))
                             .collect(Collectors.toList())
             );
+        }
+
+        List<Comentario> comentariosPadres = medicamento.getComentarios().stream()
+                .filter(comentario -> comentario.getComentarioPadre() == null)
+                .collect(Collectors.toList());
+        for (Comentario comentario : comentariosPadres) {
+            ComentarioDto comentarioDto = ComentarioDto.from(comentario);
+            medicamentoDto.getComentarios().add(comentarioDto);
         }
 
         return medicamentoDto;
