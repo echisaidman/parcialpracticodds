@@ -14,11 +14,11 @@ import java.io.IOException;
 @Slf4j
 public class CalculadoraExternaBMI implements CalculadoraBMI {
     @Override
-    public double calcular(double altura, double peso) throws IOException {
+    public double calcular(double alturaEnMetros, double pesoEnKg) throws IOException {
         // https://rapidapi.com/principalapis/api/body-mass-index-bmi-calculator/
         try {
-            String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=" + peso +
-                    "&height=" + altura;
+            String url = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric?weight=" + pesoEnKg +
+                    "&height=" + alturaEnMetros;
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
