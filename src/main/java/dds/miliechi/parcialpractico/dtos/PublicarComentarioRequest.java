@@ -10,6 +10,6 @@ import lombok.Setter;
 public class PublicarComentarioRequest {
     private long idMedicamento;
     private String titulo;
-    private String descripcion;
+    private String mensaje;
     private Long idComentarioPadre;
 }

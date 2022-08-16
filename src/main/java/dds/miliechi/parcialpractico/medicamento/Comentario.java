@@ -28,7 +28,7 @@ public class Comentario extends BaseEntity {
     private Medicamento medicamento;
 
     private String titulo;
-    private String descripcion;
+    private String mensaje;
     private LocalDateTime fechaPublicacion;
 
     @ManyToOne
@@ -38,11 +38,11 @@ public class Comentario extends BaseEntity {
     @OneToMany(mappedBy = "comentarioPadre", cascade = {CascadeType.ALL})
     private List<Comentario> respuestas = new ArrayList<>();
 
-    private Comentario(AppUser usuario, Medicamento medicamento, String titulo, String descripcion, LocalDateTime fechaPublicacion, Comentario comentarioPadre) {
+    private Comentario(AppUser usuario, Medicamento medicamento, String titulo, String mensaje, LocalDateTime fechaPublicacion, Comentario comentarioPadre) {
         this.usuario = usuario;
         this.medicamento = medicamento;
         this.titulo = titulo;
-        this.descripcion = descripcion;
+        this.mensaje = mensaje;
         this.fechaPublicacion = fechaPublicacion;
         this.comentarioPadre = comentarioPadre;
     }
@@ -56,13 +56,13 @@ public class Comentario extends BaseEntity {
         private AppUser usuario = null;
         private Medicamento medicamento = null;
         private String titulo = null;
-        private String descripcion = null;
+        private String mensaje = null;
         private LocalDateTime fechaPublicacion = LocalDateTime.now();
         private Comentario comentarioPadre = null;
 
         public Comentario build() {
             validar();
-            return new Comentario(usuario, medicamento, titulo, descripcion, fechaPublicacion, comentarioPadre);
+            return new Comentario(usuario, medicamento, titulo, mensaje, fechaPublicacion, comentarioPadre);
         }
 
         public Builder setUsuario(AppUser usuario) {
@@ -80,8 +80,8 @@ public class Comentario extends BaseEntity {
             return this;
         }
 
-        public Builder setDescripcion(String descripcion) {
-            this.descripcion = descripcion;
+        public Builder setMensaje(String mensaje) {
+            this.mensaje = mensaje;
             return this;
         }
 

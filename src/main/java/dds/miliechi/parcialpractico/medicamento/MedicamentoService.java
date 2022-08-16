@@ -47,7 +47,7 @@ public class MedicamentoService {
                 .setUsuario(usuario)
                 .setMedicamento(medicamento)
                 .setTitulo(request.getTitulo())
-                .setDescripcion(request.getDescripcion())
+                .setMensaje(request.getMensaje())
                 .setFechaPublicacion(LocalDateTime.now());
 
         if (request.getIdComentarioPadre() != null) {
