@@ -5,7 +5,6 @@ import dds.miliechi.parcialpractico.laboratorio.LaboratorioService;
 import dds.miliechi.parcialpractico.security.AppUser;
 import dds.miliechi.parcialpractico.security.IsAdmin;
 import dds.miliechi.parcialpractico.security.UserService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +39,7 @@ public class MedicamentoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MedicamentoDto> getById(@Param("id") long id) {
+    public ResponseEntity<MedicamentoDto> getById(@PathVariable("id") long id) {
         return ResponseEntity.ok(medicamentoService.findById(id));
     }
 
